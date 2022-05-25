@@ -24,6 +24,29 @@ plot3d(x,y,z,col = 'blue',alpha = 0.3,type = 'l')
 
 #Sample Calculations---------------------------------------------------------------
 
+
+#绘图尝试
+xlim<-seq(-2,2,by=0.01)
+ylim<-seq(-2,2,by=0.01)
+M<-mesh(xlim,ylim)
+x<-M$x
+y<-M$y
+s2<-x^2+y^2
+c<-0.25
+A2<-1
+A4<-1
+z<-(c*s2)/(1+sqrt(1-c^2*s2))+A2*s2+A4*s2^2
+df1<-data.frame(x=x,y=y,z=z)
+
+axisxdata<-data.frame(x=rep(0,length=1000),y=rep(0,length=1000),z=seq(from=0,to=1000,length=1000))
+df2<-rbind(df1,axisxdata)
+#绘图
+library(plot3D)
+library(rgl)
+plot3d(x,y,z,col = 'blue',alpha = 0.3,type = 'l')
+
+
+
 #Ray Tracing
 library(dplyr)
 
@@ -110,7 +133,7 @@ TSCParFunc<-function(x,h1)
     
     
   }
-  
+   
   
   
     
@@ -167,5 +190,12 @@ TSC<-TSCParFunc(TRACDATA,-2.1e-7)
 
 ##整合计算数据
 SUMA<-cbind(TraAxis,TraSlant,TAchC_FC,TAchC_Fd,TchC_FC,TchC_Fd)%>%rename(PYC=y,PUC=u,PUPC=up,PIC=ia)
+
+
+
+
+
+
+
 
 
